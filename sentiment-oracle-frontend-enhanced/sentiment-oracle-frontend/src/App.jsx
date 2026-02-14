@@ -101,7 +101,20 @@ function App() {
   return (
     <div className="app">
       {/* Animated background pattern */}
-      <div className="background-pattern"></div>
+      <div className="background-pattern">
+        {/* Particle stars */}
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="particle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${15 + Math.random() * 10}s`,
+            }}
+          />
+        ))}
+      </div>
       
       {/* Header */}
       <header className="app-header">

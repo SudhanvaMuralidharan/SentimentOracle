@@ -1,190 +1,137 @@
-/* SentimentCard Styles */
+/* SentimentCard Styles - Exact replica from image */
 
 .sentiment-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 20px;
-  padding: 28px;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.2),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-  border-top: 4px solid;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(15, 15, 45, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 32px;
+  border: 2px solid;
+  transition: all 0.4s ease;
   min-width: 320px;
-  max-width: 400px;
+  max-width: 420px;
   position: relative;
   overflow: hidden;
 }
 
-.sentiment-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
+/* Neon border colors for each crypto */
+.sentiment-card:nth-child(1) {
+  border-image: linear-gradient(135deg, #f97316, #ec4899, #a855f7) 1;
+  box-shadow: 
+    0 0 40px rgba(249, 115, 22, 0.3),
+    0 0 80px rgba(236, 72, 153, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.sentiment-card:hover::before {
-  opacity: 1;
-  animation: rotateGlow 8s linear infinite;
+.sentiment-card:nth-child(2) {
+  border-image: linear-gradient(135deg, #8b5cf6, #6366f1, #3b82f6) 1;
+  box-shadow: 
+    0 0 40px rgba(139, 92, 246, 0.3),
+    0 0 80px rgba(99, 102, 241, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-@keyframes rotateGlow {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.sentiment-card:nth-child(3) {
+  border-image: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6) 1;
+  box-shadow: 
+    0 0 40px rgba(6, 182, 212, 0.3),
+    0 0 80px rgba(59, 130, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .sentiment-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.3),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.4),
-    0 0 40px rgba(102, 126, 234, 0.2);
+  transform: translateY(-4px);
 }
 
 /* Header */
 .card-header {
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
 .crypto-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .crypto-icon {
-  font-size: 36px;
+  font-size: 48px;
   font-weight: bold;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-  transition: all 0.3s ease;
-  animation: iconFloat 3s ease-in-out infinite;
-}
-
-@keyframes iconFloat {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-5px) rotate(-3deg);
-  }
-  75% {
-    transform: translateY(-5px) rotate(3deg);
-  }
-}
-
-.sentiment-card:hover .crypto-icon {
-  transform: scale(1.1) rotate(5deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(139, 92, 246, 0.2);
 }
 
 .crypto-name {
   margin: 0;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
-  color: #1f2937;
+  color: white;
   letter-spacing: -0.5px;
 }
 
 .crypto-symbol {
-  font-size: 14px;
-  color: #6b7280;
-  font-weight: 600;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
   letter-spacing: 0.5px;
+  margin-top: 2px;
 }
 
 /* Sentiment Score */
 .sentiment-score {
-  margin: 24px 0;
+  margin: 32px 0;
 }
 
 .score-display {
   text-align: center;
-  margin-bottom: 20px;
-  position: relative;
+  margin-bottom: 24px;
 }
 
 .score-number {
-  font-size: 56px;
+  font-size: 72px;
   font-weight: 800;
   line-height: 1;
   margin-bottom: 12px;
-  background: linear-gradient(135deg, currentColor, currentColor);
-  -webkit-background-clip: text;
-  background-clip: text;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
-  transition: all 0.4s ease;
-  position: relative;
-}
-
-.sentiment-card:hover .score-number {
-  transform: scale(1.05);
-  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.15));
+  color: white;
+  text-shadow: 0 0 30px rgba(167, 139, 250, 0.6);
 }
 
 .score-label {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  background: linear-gradient(135deg, currentColor, currentColor);
-  -webkit-background-clip: text;
-  background-clip: text;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Score Bar */
 .score-bar {
   width: 100%;
-  height: 14px;
-  background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
-  border-radius: 10px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
   overflow: hidden;
   position: relative;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .score-fill {
   height: 100%;
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease;
-  border-radius: 10px;
+  transition: width 0.8s ease;
+  border-radius: 4px;
   position: relative;
-  background: linear-gradient(90deg, currentColor, currentColor);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(90deg, #f97316, #ec4899, #a855f7);
 }
 
-.score-fill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0.3) 0%, 
-    rgba(255, 255, 255, 0) 50%, 
-    rgba(255, 255, 255, 0.3) 100%
-  );
-  animation: shimmer 2s infinite;
+.sentiment-card:nth-child(2) .score-fill {
+  background: linear-gradient(90deg, #8b5cf6, #6366f1, #3b82f6);
 }
 
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+.sentiment-card:nth-child(3) .score-fill {
+  background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6);
 }
 
 /* Alert Banner */
@@ -192,75 +139,83 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px;
-  border-radius: 8px;
-  margin: 16px 0;
-  font-size: 13px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin: 20px 0;
+  font-size: 12px;
   font-weight: 500;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
 }
 
 .alert-positive {
-  background: #d1fae5;
-  color: #065f46;
-  border: 1px solid #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
 }
 
 .alert-negative {
-  background: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
 }
 
 /* Metadata */
 .card-metadata {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 20px 0;
-  padding: 16px;
-  background: #f9fafb;
-  border-radius: 8px;
+  gap: 16px;
+  margin: 24px 0;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .metadata-item {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+  text-align: center;
 }
 
 .metadata-label {
   font-size: 11px;
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
 }
 
 .metadata-value {
-  font-size: 14px;
-  color: #1f2937;
-  font-weight: 600;
+  font-size: 15px;
+  color: white;
+  font-weight: 700;
 }
 
 /* Trend Indicator */
 .trend-indicator {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  margin: 16px 0;
-  font-size: 14px;
-  font-weight: 500;
+  margin: 20px 0;
+  padding: 12px;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* Analyze Button */
 .analyze-button {
   width: 100%;
   padding: 16px 24px;
-  border: 2px solid transparent;
+  border: 2px solid;
   border-radius: 12px;
-  background: linear-gradient(white, white) padding-box,
-              linear-gradient(135deg, currentColor, currentColor) border-box;
-  color: #1f2937;
+  background: rgba(79, 70, 229, 0.2);
+  color: white;
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
@@ -268,48 +223,48 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   margin-top: 24px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   letter-spacing: 0.5px;
 }
 
-.analyze-button::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
-  transform: translate(-50%, -50%);
-  transition: width 0.6s ease, height 0.6s ease;
+.sentiment-card:nth-child(1) .analyze-button {
+  border-color: #ec4899;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
 }
 
-.analyze-button:hover:not(:disabled)::before {
-  width: 400px;
-  height: 400px;
+.sentiment-card:nth-child(2) .analyze-button {
+  border-color: #6366f1;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.sentiment-card:nth-child(3) .analyze-button {
+  border-color: #3b82f6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
 }
 
 .analyze-button:hover:not(:disabled) {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 
-    0 12px 28px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.5),
-    0 0 30px rgba(102, 126, 234, 0.3);
+  transform: translateY(-2px);
+  background: rgba(79, 70, 229, 0.3);
 }
 
-.analyze-button:active:not(:disabled) {
-  transform: translateY(-1px) scale(0.98);
+.sentiment-card:nth-child(1) .analyze-button:hover:not(:disabled) {
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
+}
+
+.sentiment-card:nth-child(2) .analyze-button:hover:not(:disabled) {
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+}
+
+.sentiment-card:nth-child(3) .analyze-button:hover:not(:disabled) {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
 }
 
 .analyze-button:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
-  background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
 }
 
 .spinning {
@@ -317,12 +272,8 @@
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Responsive */
@@ -330,14 +281,15 @@
   .sentiment-card {
     min-width: 280px;
     max-width: 100%;
+    padding: 24px;
   }
   
   .card-metadata {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 12px;
   }
   
   .score-number {
-    font-size: 40px;
+    font-size: 56px;
   }
 }
