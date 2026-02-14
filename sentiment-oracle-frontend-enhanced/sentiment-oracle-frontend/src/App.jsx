@@ -59,37 +59,35 @@ function App() {
 
   // Handle analyze button click
   const handleAnalyze = async (crypto) => {
-    // Note: In production, this would trigger the backend oracle service
-    // For demo purposes, we'll just show a message
-    
     setAnalyzingCrypto(crypto.id);
     showNotification(
       `Analysis triggered for ${crypto.name}. Oracle service will update the sentiment shortly.`,
       'info'
     );
 
-    // Simulate analysis time
-    setTimeout(() => {
-      setAnalyzingCrypto(null);
-      refetchSentiments();
-      showNotification(
-        `${crypto.name} sentiment analysis complete!`,
-        'success'
-      );
-    }, 3000);
+    try {
+      const response = await fetch("http://localhost:5000/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topic: crypto.name }) // backend expects "topic"
+      });
 
-    // In production, you would call your backend API here:
-    // try {
-    //   const response = await fetch('/api/analyze', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ crypto: crypto.name })
-    //   });
-    //   const data = await response.json();
-    //   // Handle response...
-    // } catch (err) {
-    //   showNotification(`Error analyzing ${crypto.name}: ${err.message}`, 'error');
-    // }
+      const data = await response.json();
+
+      if (response.ok) {
+        showNotification(
+          `${crypto.name} sentiment analysis complete! Score: ${data.vibeScore}`,
+          "success"
+        );
+        refetchSentiments();
+      } else {
+        showNotification(`Error: ${data.error}`, "error");
+      }
+    } catch (err) {
+      showNotification(`Error analyzing ${crypto.name}: ${err.message}`, "error");
+    } finally {
+      setAnalyzingCrypto(null);
+    }
   };
 
   // Format account address
