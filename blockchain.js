@@ -1,5 +1,6 @@
-const { ethers } = require("ethers");
-require("dotenv").config();
+
+import { ethers } from "ethers";
+import "dotenv/config";
 
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
 const RPC_URL = process.env.RPC_URL;
@@ -16,6 +17,4 @@ async function pushScoreOnChain(score) {
   return "0xFAKE_TX_HASH";
 }
 
-module.exports = { pushScoreOnChain };
-
-module.exports = { pushScoreOnChain };
+export{ pushScoreOnChain};

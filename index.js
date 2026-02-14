@@ -1,64 +1,60 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
 
-const { analyzeText } = require("./sentiment");
-const { pushScoreOnChain } = require("./blockchain");
+
+
+
+import express from "express";
+import cors from "cors";
+import "dotenv/config";
+
+import { hfAnalyze } from "./hfSentimentService.js";
+import { pushToChain } from "./oracle.js";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Store latest vibeScore in memory for GET endpoint
-let latestVibeScore = null;
-
-// Root route
+// TEST route
 app.get("/", (req, res) => {
-  res.send("Sentiment Oracle Backend Running ✅");
+  res.send("Sentiment Oracle Backend is running 🚀");
 });
 
-// POST /analyze → analyze sentiment and push to blockchain
+// MAIN analyze route
 app.post("/analyze", async (req, res) => {
   try {
-    const { posts } = req.body;
+    const { topic } = req.body;
 
-    if (!posts || !Array.isArray(posts)) {
-      return res.status(400).json({ error: "posts array required" });
+    if (!topic) {
+      return res.status(400).json({ error: "topic is required" });
     }
 
-    // Analyze sentiment
-    const vibeScore = analyzeText(posts);
+    // Dummy posts for hackathon demo
+    const posts = [
+      `${topic} is going to the moon 🚀🚀`,
+      `People are scared, but ${topic} looks strong`,
+      `${topic} is overhyped, might dump soon`,
+      `Huge whales are buying ${topic}, bullish vibes`,
+      `${topic} sentiment looks mixed right now`
+    ];
 
-    // Push to blockchain (mocked for hackathon)
-    const txHash = await pushScoreOnChain(vibeScore);
+    // AI Sentiment Score using Gemini
+    const vibeScore = await hfAnalyze(posts);
 
-    // Save latest score in memory
-    latestVibeScore = vibeScore;
+    // Push score on-chain
+    const txHash = await pushToChain(vibeScore);
 
-    res.json({
+    return res.json({
       vibeScore,
       txHash,
-      message: "Sentiment analyzed and pushed on-chain",
+      message: "Sentiment analyzed with Gemini and pushed on-chain",
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("ERROR:", err.message);
+    return res.status(500).json({ error: err.message });
   }
 });
 
-// GET /sentiment/BTC → fetch latest score
-app.get("/sentiment/BTC", (req, res) => {
-  if (latestVibeScore === null) {
-    return res.status(404).json({ error: "No sentiment available yet" });
-  }
-
-  res.json({
-    vibeScore: latestVibeScore,
-    message: "Latest sentiment fetched successfully",
-  });
-});
-
-// Start server
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`);
 });
